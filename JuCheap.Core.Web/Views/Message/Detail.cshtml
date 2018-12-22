@@ -1,0 +1,49 @@
+﻿@model JuCheap.Core.Models.MessageQueryDto
+
+@{
+    ViewBag.Title = "站内信详情";
+    Layout = "~/Views/Shared/_Layout_Content.cshtml";
+}
+
+<div class="wrapper wrapper-content">
+
+    <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5>站内信内容 </h5>
+            </div>
+            <div class="ibox-content">
+                <p>标题：@Model.Title</p>
+                <p>内容：@Model.Contents</p>
+                <p>已读/总量：@Model.ReadedNumber / @Model.Total</p>
+            </div>
+        </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>用户名</th>
+                    <th>是否已读</th>
+                    <th>阅读日期</th>
+                    <th>创建日期</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var detail in Model.Details)
+                {
+                    <tr>
+                        <td>@detail.UserName</td>
+                        <td>
+                           @if (detail.IsReaded)
+                           {
+                               <i class="fa fa-check text-navy"></i>
+                           }
+                        </td>
+                        <td>@detail.ReadDate?.ToShortDateString()</td>
+                        <td>@detail.CreateDateTime</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
